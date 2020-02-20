@@ -1,11 +1,7 @@
 const prompt = require('inquirer').createPromptModule()
 
- prompt([
-  {
-    type: 'input',
-    name: 'role',
-    message: 'Are you a manager, engineer, or intern?'
-  },
+function questionsOne() {
+prompt([
   {
     type: 'input',
     name: 'name',
@@ -20,20 +16,51 @@ const prompt = require('inquirer').createPromptModule()
      type: 'input',
      name: 'id',
      message: 'What is your id?'
+   },
+   {
+     type: 'list',
+     name: 'role',
+     messsage: 'What is your role??',
+     choices: ['manager', 'engineer', 'intern']
    }
-
 ])
 
-.then(({role, name, email, id}) =>{
+  .then(function (answers) {
 
-  if (role.value === 'manager') {
-  console.log('manager')
-  }
+    switch (answers.role) {
+      case 'manager':
+        prompt([
+          {
+            type: 'text',
+            name: 'officeNumber',
+            message: 'What is your office number?'
+          }
+        ])
+        break
+      case 'engineer':
+        prompt([
+          {
+            type: 'text',
+            name: 'github',
+            message: 'Provide a link to your github account.'
+          }
+        ])
+        break
+      case 'intern':
+        prompt([
+          {
+            type: 'text',
+            name: 'officeNumber',
+            message: 'What is your office number?'
+          }
+        ])
+        break
+    }
 
- else if (role.value === 'engineer') {
-    console.log('engineer')
-  }
-})
+  })
+}
+
+questionsOne()
 
 
 // class Employee {
